@@ -1,5 +1,5 @@
 '''
-Replication of "Using occupancy grids for mobile robot perception and navigation" by Alberto Elfes
+Replication of Figure 2 from "Occupancy Grids: A Stochastic Spatial Representation for Active Robot Perception" by Alberto Elfes
 '''
 
 import numpy as np
@@ -34,20 +34,9 @@ def state_probability(rng, measurement):
     '''
     Creates probability of given state for a noisy model
     '''
-    '''p_sensor = gaussian_model(rng, sigma, measurement)
-    p_state = np.zeros(rng.size)
-    for i in range(rng.size):
-        D = rng[i]
-        profile = ideal_model(rng, D, sigma)
-        probability = p_sensor[i]
-        p_state += profile*probability'''
-    n_points = rng.size
     p_sensor = gaussian_model(rng, sigma, measurement)
     profile = ideal_model(rng, measurement-2*sigma/3, sigma)
-    #p_sensor = p_sensor*2
-    #p_sensor[int(n_points/2):] = 0
     p_state = convolve1d(profile, weights=p_sensor)
-    #p_state = gaussian_filter1d(profile, sigma*(n_points/4))
     
     return p_state
 
@@ -74,7 +63,8 @@ for i in range(5):
 
     prior = posterior
 
-plt.plot(rng, ideal_model(rng, measurement-2*sigma/3, sigma))
+plt.xlabel('Range')
+plt.ylabel('Probability of occupancy')
 plt.ylim([0,1])
 plt.grid(True)
 plt.show()

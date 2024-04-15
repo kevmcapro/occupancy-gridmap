@@ -1,5 +1,5 @@
 '''
-Replication of "Using occupancy grids for mobile robot perception and navigation" by Alberto Elfes
+Replication of Figure 3 from "Occupancy Grids: A Stochastic Spatial Representation for Active Robot Perception" by Alberto Elfes
 '''
 
 import numpy as np
